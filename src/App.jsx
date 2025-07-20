@@ -22,13 +22,17 @@ import Contact from "./pages/Contact";
 
 function App() {
   const isSellerPath = useLocation().pathname.includes("seller");
-  const { showUserLogin, isSeller } = useAppContext();
+  const { showUserLogin, setShowUserLogin, user, isSeller } = useAppContext();
+
+  // If user is not logged in, always show login modal and block app
+  if (!user) {
+    if (!showUserLogin) setShowUserLogin(true);
+    return <Login />;
+  }
 
   return (
     <div className="text-default min-h-screen text-gray-700 bg-white">
       {isSellerPath ? null : <Navbar />}
-      {showUserLogin ? <Login /> : null}
-
       <Toaster />
 
       <div
