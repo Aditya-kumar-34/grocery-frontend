@@ -41,6 +41,11 @@ const Cart = () => {
 
   const placeOrder = (e) => {
     e.preventDefault();
+    // Check if cart is empty
+    if (!cartArray || cartArray.length === 0) {
+      alert("Your cart is empty! Please add items to cart before proceeding to checkout.");
+      return;
+    }
     console.log("Placing order with cart:", cartItems);
 
     const tax = (getCartAmount() * 2) / 100;
